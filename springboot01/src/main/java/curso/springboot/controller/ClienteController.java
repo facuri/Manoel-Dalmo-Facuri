@@ -11,34 +11,34 @@ import curso.springboot.repository.PessoaRepository;
 
 //Contoller MVC - interceptar requisições da URL(View)
 @Controller 
-public class PessoaController {
+public class ClienteController {
 	
 	@Autowired
-	private PessoaRepository pessoaRepository;
+	private ClienteRepository clienteRepository;
 	
 	//Método de Redirecionamento para a página cadastropessoa.html
-	@RequestMapping(method = RequestMethod.GET, value = "/cadastropessoa")
+	@RequestMapping(method = RequestMethod.GET, value = "/cadastrocliente")
 	public String inicio() {
-		return "cadastro/cadastropessoa";
+		return "cadastro/cadastrocliente";
 		
 	}
 	//Método Salvar no Banco de Dados
-	@RequestMapping(method = RequestMethod.POST, value = "/salvarpessoa")
-	public ModelAndView salvar(Pessoa pessoa) {
-		pessoaRepository.save(pessoa);
+	@RequestMapping(method = RequestMethod.POST, value = "/salvarcliente")
+	public ModelAndView salvar(Cliente cliente) {
+		clienteRepository.save(cliente);
 		
-		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
-		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
-		andView.addObject("pessoas", pessoasIt);
+		ModelAndView andView = new ModelAndView("cadastro/cadastrocliente");
+		Iterable<cliente> clientesIt = clienteRepository.findAll();
+		andView.addObject("clientes", clientesIt);
 		
 		return andView;
 	}
 	//Método listar cadastros na página cadastropessoa.html
-	@RequestMapping(method = RequestMethod.GET, value = "/listapessoas")
-	public ModelAndView pessoas() {
-		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
+	@RequestMapping(method = RequestMethod.GET, value = "/listaclientes")
+	public ModelAndView clintes() {
+		ModelAndView andView = new ModelAndView("cadastro/cadastrocliente");
 		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
-		andView.addObject("pessoas", pessoasIt);
+		andView.addObject("clientes", clientesIt);
 		return andView;
 	}
 
