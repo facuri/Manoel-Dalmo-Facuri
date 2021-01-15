@@ -7,23 +7,36 @@
 </head>
 <body>
        <form action="salvarpessoa" method="post">
+          <label>ID:</label>
+          <input type="text" name="id">
           <label>Nome:</label>
           <input type="text" name="nome">
-          <label>Sobrenome:</label>
-          <input type="text" name="sobrenome">
-          <label>Idade:</label>
-          <input type="text" name="idade">
+          <label>Endereco:</label>
+          <input type="text" name="endereco">
+          <label>Telefone:</label>
+          <input type="text" name="telefone">
+          <label>Email:</label>
+          <input type="text" name="email">
+          <label>CPF:</label>
+          <input type="text" name="cpf">
+          <label>Data:</label>
+          <input type="Data Nascimento" name="dataNasc">
           <input type="submit" value="Salvar">
       </form>
       
       <!--  <a href="/listapessoas">ListaPessoas</a>--->
-      <h1>Lista de Pessoas</h1>
+      <h1>Lista de Clientes</h1>
       
       <table>
-           <tr th:each = "pessoa : ${pessoas}">
-           <td th:text = "${pessoa.id}"></td>
+           <tr th:each = "cliente : ${clientes}">
+           <td th:text = "${cliente.id}"></td>
            <td th:text = "${pessoa.nome}"></td>
-           <td th:text = "${pessoa.sobrenome}"></td>
+           <td th:text = "${cliente.endereco}"></td>
+           <td th:text = "$cliente.telefone}"></td>
+          <td th:text = "${cliente.email}"></td>
+          <td th:text = "${cliente.cpf}"></td>
+          <td th:text = "${cliente.dataNasc}"></td>
+            
            
            </tr>
       </table>

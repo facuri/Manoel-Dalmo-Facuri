@@ -33,13 +33,42 @@ public class ClienteController {
 		
 		return andView;
 	}
-	//Método listar cadastros na página cadastropessoa.html
+	 
 	@RequestMapping(method = RequestMethod.GET, value = "/listaclientes")
 	public ModelAndView clintes() {
 		ModelAndView andView = new ModelAndView("cadastro/cadastrocliente");
 		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
 		andView.addObject("clientes", clientesIt);
 		return andView;
-	}
+    }
+    
+    @GetMapping("/removercliente/{idcliente}")
+	public ModelAndView excluir(@PathVariable("idcliene") Long idpessoa) {
+		
+		pessoaRepository.deleteById(idcliente);	
+		
+		ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa");
+		modelAndView.addObject("cliente", pessoaRepository.findAll());
+		modelAndView.addObject("clientebj", new cliente());
+		return modelAndView;
+		
+    }
+     	@PostMapping("**/pesquisarnome")
+	public ModelAndView pesquisar(@RequestParam("nomepesquisa") String nomepesquisa, 
+			@RequestParam("pesqcpf") String pesqcpf) {
+		
+		List<Cliente> pessoas = new ArrayList<Cliente>();
+		
+		if (pesqcpf != null && !pesqcpf.isEmpty()) {
+			cliente = clienteRepository.findClienteByNameCpf(nomepesquisa, pesqcpf);
+		}else {
+			clientes = clienteRepository.findClienteByName(nomepesquisa);
+		}
+	
+		ModelAndView modelAndView = new ModelAndView("cadastro/cadastrocliente");
+		modelAndView.addObject("clientes", clientes);
+		modelAndView.addObject("clienteobj", new Cliente());
+		return modelAndView;
+            }
 
 }
