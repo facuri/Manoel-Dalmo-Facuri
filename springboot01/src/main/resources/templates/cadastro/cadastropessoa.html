@@ -6,25 +6,25 @@
 <title>Insert title here</title>
 </head>
 <body>
-       <form action="salvarpessoa" method="post">
+       <form action="salvarpessoa" method="post" onsubmit="return validarCampos() ? true : false;"></form>>
           <label>ID:</label>
-          <input type="text" name="id">
+          <input type="text" name="id" id="id">
           <label>Nome:</label>
-          <input type="text" name="nome">
+          <input type="text" name="nome" id="nome">
           <label>Endereco:</label>
-          <input type="text" name="endereco">
+          <input type="text" name="endereco" id="endereco">
           <label>Telefone:</label>
-          <input type="text" name="telefone">
+          <input type="text" name="telefone" id="telefone">
           <label>Email:</label>
-          <input type="text" name="email">
+          <input type="text" name="email" id="email">
           <label>CPF:</label>
-          <input type="text" name="cpf">
+          <input type="text" name="cpf" id="cpf">
           <label>Data:</label>
-          <input type="Data Nascimento" name="dataNasc">
+          <input type="Data Nascimento" name="dataNasc" id="dataNasc">
           <input type="submit" value="Salvar">
       </form>
       
-      <!--  <a href="/listapessoas">ListaPessoas</a>--->
+         <a href="/listapessoas">ListaPessoas</a>
       <h1>Lista de Clientes</h1>
       
       <table>
@@ -36,9 +36,54 @@
           <td th:text = "${cliente.email}"></td>
           <td th:text = "${cliente.cpf}"></td>
           <td th:text = "${cliente.dataNasc}"></td>
+
+     <td><a th:href="@{/editarcliente/{idcliente}(idcliente=${cliente.cpf})}">Editar</a> </td>
+   <td><a th:href="@{/removercliente/{idcliente}(idcliente=${cliente.id})}">Excluir</a> </td>
+
             
            
            </tr>
       </table>
+      <form action="pesquisarcliente"  method="post">
+          <div class="row">
+				<div class="input-field col s6">
+					<label for="nomepesquisa" class="active">Pesquia por nome:</label>
+					<input name="nomepesquisa" id="nomepesquisa" class="validate">
+					
+                </div>
+                <div class="row">
+				<div class="input-field col s6">
+					<label for="pesqcpf" class="active">Pesquia por CPF:</label>
+					<input name="pesqcpf" id="pesqcpf" class="validate">
+					
+                </div>
+                
+                <td><a th:href="@{/removerpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Excluir</a> </td>
+
+
+
+
+
+      </form>
+      <script type="text/javascript">
+		function validarCampos() {
+			if (document.getElementById("nome").value == '') {
+				alert('Informe o Nome');
+				return false;
+			} else if (document.getElementById("cpf").value == '') {
+				alert('Informe o CPF');
+				return false;
+			} else if (document.getElementById("email").value == '') {
+				alert('Informe o Email');
+				return false;
+			} else if (document.getElementById("telefone").value == '') {
+				alert('Informe o Telefone');
+				return false;
+			}
+			
+			return true;
+		}
+	</script>
+
 </body>
 </html>
